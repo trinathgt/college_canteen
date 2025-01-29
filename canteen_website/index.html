@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRCET E-Canteen</title> <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=YourChosenFont:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+    <!-- Optional, for Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+    <!-- Optional, for Realtime DB -->
+</head>
+
+<body>
+    <header>
+        <a href="index.html" class="logo"><i class="fas-fa-utensils"></i>MRCET E-Canteen</a>
+        <nav class="navbar">
+            <a href="index.html" id="home" class="active">Home</a>
+            <a href="special.html" id="special">Special</a>
+            <a href="login.html" id="login">Login</a>
+            <a href="signup.html" id="signup">Sign Up</a>
+            <a href="feedback.html" id="feedback">Feedback</a>
+        </nav>
+
+        <div class="icons">
+            <i class="fa fa-bars" aria-hidden="true" id="menu-bars"></i>
+            <div class="search-container">
+                <i class="fas fa-search" onclick="toggleSearch()"></i>
+                <input type="text" id="searchBar" placeholder="Search..." class="search-bar" onkeyup="searchItems()">
+            </div>
+            <i class="fa fa-heart" aria-hidden="true"></i>
+            <i class="fa fa-cart-arrow-down" aria-hidden="true" id="cartbtn"></i>
+        </div>
+    </header>
+
+    <!--home section-->
+    <section class="home" id="home">
+        <div class="swiper home-slider">
+            <div class="swiper-wrapper wrapper">
+                <div class="swiper-slide slide">
+                    <div class="content">
+                        <span>HAVE IT...!</span>
+                        <h3>Spicy Noodles</h3>
+                        <p>Taste hot and spicy noodles</p>
+                        <a href="#" class="btn">Order Now</a>
+                    </div>
+                    <div class="image">
+                        <img src="image1.png" alt="img_">
+                    </div>
+                </div>
+                <div class="swiper-slide slide">
+                    <div class="content">
+                        <span>TASTE THIS..!</span>
+                        <h3>Biriyani</h3>
+                        <p>Savor the Tradition, Taste the Perfection</p>
+                        <a href="#" class="btn">Order Now</a>
+                    </div>
+                    <div class="image">
+                        <img src="image2.png" alt="img_">
+                    </div>
+                </div>
+                <div class="swiper-slide slide">
+                    <div class="content">
+                        <span>SUMMER SPECIAL</span>
+                        <h3>Ice Creams</h3>
+                        <p>Chill Out with the Creamiest Delights</p>
+                        <a href="#" class="btn">Order Now</a>
+                    </div>
+                    <div class="image">
+                        <img src="image3.png" alt="img_">
+                    </div>
+                </div>
+                <div class="swiper-slide slide">
+                    <div class="content">
+                        <span>Only For U</span>
+                        <h3>Combo Carnival</h3>
+                        <p>Perfect Pairs for Perfect Moments</p>
+                        <a href="#" class="btn">Order Now</a>
+                    </div>
+                    <div class="image">
+                        <img src="image4.png" alt="img_">
+                    </div>
+                </div>
+                <div class="swiper-slide slide">
+                    <div class="content">
+                        <span>Dare to leep</span>
+                        <h3>BURGER</h3>
+                        <p>Bite into Happiness with Every Burger</p>
+                        <a href="#" class="btn">Order Now</a>
+                    </div>
+                    <div class="image">
+                        <img src="image5.png" alt="img_">
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <!--
+        main menu
+    -->
+    <div class="main-menu" id="mainmenu">
+        <div class="main-filter">
+            <div class="main-arrow">
+                <h2 class="main-title">Menu <br>category</h2>
+
+                <i class="fa fa-arrow-circle-left" aria-hidden="true" id="nxt"></i>
+                <i class="fa fa-arrow-circle-right" aria-hidden="true" id="prev"></i>
+            </div>
+
+            <div class="filter-wrapper">
+                <div class="filter-card" id="c1">
+                    <div class="filter-icon">
+                        <img src="menu0.png" alt="">
+                    </div>
+                    <p>Samosa</p>
+                </div>
+                <div class="filter-card" id="c2">
+                    <div class="filter-icon">
+                        <img src="menu1.png" alt="burger">
+                    </div>
+                    <p>Burger</p>
+                </div>
+                <div class="filter-card" id="c3">
+                    <div class="filter-icon">
+                        <img src="menu2.png" alt="">
+                    </div>
+                    <p>Pizza</p>
+                </div>
+                <div class="filter-card" id="c4">
+                    <div class="filter-icon">
+                        <img src="menu8.png" alt="">
+                    </div>
+                    <p>Biriyani</p>
+                </div>
+                <div class="filter-card" id="c5">
+                    <div class="filter-icon">
+                        <img src="menu3.png" alt="" width="70px">
+                    </div>
+                    <p>Drinks</p>
+                </div>
+                <div class="filter-card" id="c6">
+                    <div class="filter-icon">
+                        <img src="menu4.png" alt="">
+                    </div>
+                    <p>Ice Creams</p>
+                </div>
+                <div class="filter-card" id="c7">
+                    <div class="filter-icon">
+                        <img src="puffs.png" alt="">
+                    </div>
+                    <p>Puffs</p>
+                </div>
+                <div class="filter-card" id="c8">
+                    <div class="filter-icon">
+                        <img src="tea.png" alt="" width="70px">
+                    </div>
+                    <p>Coffee</p>
+                </div>
+                <div class="filter-card" id="c9">
+                    <div class="filter-icon">
+                        <img src="tiffins.png" alt="">
+                    </div>
+                    <p>Breakfast</p>
+                </div>
+                <div class="filter-card" id="c10">
+                    <div class="filter-icon">
+                        <img src="lunch.png" alt="">
+                    </div>
+                    <p>Meals</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--items of menu-->
+    <section class="samosas" id="samosas">
+        <div id="samosa_block">
+            <div class="box-container">
+                <div class="box">
+                    <div class="image">
+                        <img src="sam1.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+
+                        </div>
+                        <h3 class="name">Onion Samosa</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 20/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="sam2.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+
+                        </div>
+                        <h3 class="name">Aloo Samosa</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 20/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="sam3.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+
+                        </div>
+                        <h3 class="name">Egg Samosa</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 20/-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="burger_block">
+            <div class="box-container">
+                <div class="box">
+                    <div class="image">
+                        <img src="bur1.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+
+                        </div>
+                        <h3 class="name">Chicken Burger</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 99/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="bur2.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+
+                        </div>
+                        <h3 class="name">Veg Burger</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 79/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="bur3.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+
+                        </div>
+                        <h3 class="name">Cheese Burger</h3>
+                        <button class="add-to-cart">Add to cart</button>
+
+                        <span class="price">RS: 89/-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="pizza_block">
+            <div class="box-container">
+                <div class="box">
+                    <div class="image">
+                        <img src="piz1.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+
+                        </div>
+                        <h3 class="name">Chicken Pizza</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 149/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="piz2.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+
+                        </div>
+                        <h3 class="name">Tomato Pizza</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 135/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="piz3.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+
+                        </div>
+                        <h3 class="name">Veg Pizza</h3>
+                        <button class="add-to-cart">Add to cart</button>
+
+                        <span class="price">RS: 129/-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="biriyani_block">
+            <div class="box-container">
+                <div class="box">
+                    <div class="image">
+                        <img src="bir1.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+
+                        </div>
+                        <h3 class="name">Chicken Biriyani</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 120/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="bir2.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+
+                        </div>
+                        <h3 class="name">Egg Biriyani</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 99/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="bir3.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+
+                        </div>
+                        <h3 class="name">Veg Biriyani</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 79/-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="cool_block">
+            <div class="box-container">
+                <div class="box">
+                    <div class="image">
+                        <img src="cool1.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+
+                        </div>
+                        <h3 class="name">Thumbs Up</h3>
+
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 20/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="cool2.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+
+                        </div>
+                        <h3 class="name">Frooti</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 10/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="cool3.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+
+                        </div>
+                        <h3 class="name">Sprite</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 20/-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="ice_block">
+            <div class="box-container">
+                <div class="box">
+                    <div class="image">
+                        <img src="ice1.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+
+                        </div>
+                        <h3 class="name">Chocolate Ice Cream</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 70/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="ice2.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+
+                        </div>
+                        <h3 class="name">Strawberry Ice Cream</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 60/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="ice3.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+
+                        </div>
+                        <h3 class="name">Vanilla Ice Cream</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 60/-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="cake_block">
+            <div class="box-container">
+                <div class="box">
+                    <div class="image">
+                        <img src="vegpuff.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+
+                        </div>
+                        <h3 class="name">Veg Puff</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS:15/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="eggpuff.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+
+                        </div>
+                        <h3 class="name">Egg Puff</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 20/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="chickenpuff.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+
+                        </div>
+                        <h3 class="name">Chicken Puff</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 25/-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="coffe_block">
+            <div class="box-container">
+                <div class="box">
+                    <div class="image">
+                        <img src="cof1.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+
+                        </div>
+                        <h3 class="name">Black Coffee</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 25/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="cof2.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+
+                        </div>
+                        <h3 class="name">Tea</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 15/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="cof3.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+
+                        </div>
+                        <h3 class="name">Coffee</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 20/-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="sea_block">
+            <div class="box-container">
+                <div class="box">
+                    <div class="image">
+                        <img src="idli.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+
+                        </div>
+                        <h3 class="name">Idli</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 35/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="dosa.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+
+                        </div>
+                        <h3 class="name">Dosa</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 35/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="puri.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+
+                        </div>
+                        <h3 class="name">Puri</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 40/-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="fruit_block">
+            <div class="box-container">
+                <div class="box">
+                    <div class="image">
+                        <img src="chapathi.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+
+                        </div>
+                        <h3 class="name">Chapathi</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 50/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="paratha.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+
+                        </div>
+                        <h3 class="name">Paratha + Curry</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 75/-</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="image">
+                        <img src="meals.png" alt="" width="300px">
+                        <a href="#" class="fa fa-heart"></a>
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+
+                        </div>
+                        <h3 class="name">Meals</h3>
+                        <button class="add-to-cart">Add to cart</button>
+                        <span class="price">RS: 70/-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><i class="fas fa-info-circle"></i><a href="#">Our Story</a></li>
+                        <li><i class="fas fa-bullseye"></i><a href="#">Mission & Values</a></li>
+                        <li><i class="fas fa-users"></i><a href="#">Team</a></li>
+                        <li><i class="fas fa-briefcase"></i><a href="#">Careers</a></li>
+                        <li><i class="fas fa-star"></i><a href="#">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><i class="fas fa-home"></i><a href="index.html">Home</a></li>
+                        <li><i class="fas fa-concierge-bell"></i><a href="#mainmenu">Menu</a></li>
+                        <li><i class="fas fa-envelope"></i><a href="feedback.html">Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li><i class="fab fa-facebook"></i><a href="#">Facebook</a></li>
+                        <li><i class="fab fa-twitter"></i><a href="#">Twitter</a></li>
+                        <li><i class="fab fa-instagram"></i><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <div class="contact-form">
+                        <h3>Contact Us</h3>
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                        <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+                        <button type="submit"><i class="fas fa-paper-plane"></i> Submit</button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">&copy; 2025 MRCET E-Canteen. All rights reserved.</p>
+        </div>
+        <button onclick="scrollToTop()" id="topButton" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+    </footer>
+
+
+    <div class="sidebar" id="sidebar">
+        <div id="sidebar-close">
+            <i class="fa fa-times" aria-hidden="true" id="close-cart-btn"></i>
+        </div>
+        <div class="cart-menu">
+            <h3>My cart</h3>
+            <div class="cart-items">
+                Empty cart
+            </div>
+        </div>
+    
+        <div class="sidebar-footer">
+            <div class="total-amount">
+                <h5>Total</h5>
+                <h5 id="cart-total"></h5>
+            </div>
+            <button class="checkout" id="ordering">Order Now</button>
+        </div>
+    </div>
+    
+    <div class="placed" id="placed" style="display:none;">
+        <h2>Order placed successfully</h2>
+        <img src="order.png" alt="Order Placed">
+        <button id="backhome">Back to home</button>
+    </div>
+    
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Canteen Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .payments {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            display: block; /* Ensure it's always visible */
+        }
+        .methods {
+            margin-top: 15px;
+        }
+        .method {
+            margin-bottom: 10px;
+        }
+        .bill {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        .billdiv {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+        .buttons {
+            margin-top: 15px;
+            text-align: center;
+        }
+        .buttons button {
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #place {
+            background-color: green;
+            color: white;
+        }
+        #back {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="payments" id="payments">
+    <div id="placing">
+        <h1>Select Payment Mode</h1>
+        
+        <!-- Time Slot Selection -->
+        <div class="time-slot">
+            <h3>Select Delivery Time Slot:</h3>
+            <select id="time-slot">
+                <option value="" disabled selected>Select a time slot</option>
+                <option value="11:40 AM">11:40 AM (Break Time)</option>
+                <option value="1:00 PM">1:00 PM (Lunch Time)</option>
+            </select>
+        </div>
+
+        <!-- Payment Methods -->
+        <div class="methods">
+            <h3>Select Payment Method:</h3>
+            <div class="method">
+                <input type="radio" name="paymentMethod" id="paytm" value="Paytm">
+                <label for="paytm">Paytm</label>
+            </div>
+            <div class="method">
+                <input type="radio" name="paymentMethod" id="gpay" value="Gpay">
+                <label for="gpay">Google Pay</label>
+            </div>
+            <div class="method">
+                <input type="radio" name="paymentMethod" id="card" value="Credit/Debit">
+                <label for="card">Credit/Debit Card</label>
+            </div>
+            <div class="method">
+                <input type="radio" name="paymentMethod" id="cash" value="Cash on Delivery">
+                <label for="cash">Cash on Delivery</label>
+            </div>
+        </div>
+
+        <!-- Bill Summary -->
+        <div class="bill">
+            <h3>Total Bill:</h3>
+            <div class="billdiv">
+                <h4>Items:</h4>
+                <span id="itembill">00</span>
+            </div>
+            <div class="billdiv">
+                <h4>GST:</h4>
+                <span class="Gst">Rs: 12/-</span>
+            </div>
+            <div class="billdiv">
+                <h4>Delivery:</h4>
+                <span class="delivery">Rs: Free</span>
+            </div>
+            <div class="billdiv">
+                <h4>Amount Payable:</h4>
+                <span id="totalcost">00</span>
+            </div>
+            <div class="buttons">
+                <button id="place">Place Order</button>
+                <button id="back">Back to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("place").addEventListener("click", function() {
+        const selectedPayment = document.querySelector('input[name="paymentMethod"]:checked');
+        const selectedTimeSlot = document.getElementById("time-slot").value;
+        const paymentSection = document.getElementById("payments"); // Ensure visibility
+
+        // Check if time slot is selected
+        if (!selectedTimeSlot) {
+            alert("❌ Please select a delivery time slot before placing the order.");
+            paymentSection.style.display = "block"; // Keep payment section visible
+            return;
+        }
+
+        // Check if payment method is selected
+        if (!selectedPayment) {
+            alert("❌ Please select a payment method before placing the order.");
+            paymentSection.style.display = "block"; // Keep payment section visible
+            return;
+        }
+
+        // If both conditions are met, show success message
+        alert("✅ Order placed successfully!\n📌 Payment Method: " + selectedPayment.value + "\n⏰ Delivery Time Slot: " + selectedTimeSlot);
+        
+        // Further logic for processing order can be placed here
+    });
+
+    document.getElementById("back").addEventListener("click", function() {
+        window.location.href = "cart.html"; // Redirect to cart page (update as needed)
+    });
+});
+</script>
+
+</body>
+</html>
+
+    
+    <script src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".home-slider", {
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: {
+                delay: 1500,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            loop: true,
+        });
+
+    </script>
+
+</body>
+
+</html>
